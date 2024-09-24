@@ -8,7 +8,10 @@ import { UsersEffects } from './+state/users.effects';
 import { UsersFacade } from './+state/users.facade';
 
 export const appRoutes: Route[] = [
-    { path: 'user/:id', component: UserDetailsComponent },
+    { path: 'user/:id', component: UserDetailsComponent,
+        providers: [UsersFacade, provideState(fromUsers.USERS_FEATURE_KEY, fromUsers.usersReducer),
+            provideEffects(UsersEffects)],
+    },
     {
         path: '',
         component: UsersComponent,
