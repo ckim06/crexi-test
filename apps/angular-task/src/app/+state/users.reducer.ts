@@ -8,7 +8,6 @@ export const USERS_FEATURE_KEY = 'users';
 
 export interface UsersState extends EntityState<UsersEntity> {
     selectedId?: string | number; // which Users record has been selected
-    selectedUser?: UsersEntity;
     loaded: boolean; // has the Users list been loaded
     error?: string | null; // last known error (if any)
     filters?: UserFilters;
@@ -34,7 +33,7 @@ const reducer = createReducer(
 
         const existingUser = selectEntities(state)[user.id];
         const isFavorite = existingUser?.isFavorite || false;
-        return { ...state, selectedUser: { ...user, isFavorite } };
+        return usersAdapter.setOne({ ...user, isFavorite }, { ...state, selectedId: user.id, loaded: true });
 
     }),
     on(UsersActions.loadUsersSuccess, (state, { users }) => {
