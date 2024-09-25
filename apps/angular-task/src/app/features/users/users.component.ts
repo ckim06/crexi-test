@@ -48,7 +48,6 @@ export class UsersComponent implements OnInit {
 
     onRowClick (row: UsersEntity) {
 
-        this.usersFacade.setSelectedUser(row.id);
         this.router.navigateByUrl(`/user/${row.id}`);
 
     }
