@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersState, initialUsersState, usersReducer } from './users.reducer';
-import { userOne, userTwo } from '../mocks/users/test-users';
+import { userOne, userTwo } from '../mocks/users//test-users.mocks';
 
 describe('Users Reducer', () => {
 

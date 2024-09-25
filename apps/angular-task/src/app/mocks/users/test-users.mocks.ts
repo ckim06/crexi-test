@@ -26,21 +26,3 @@ export const userTwo = {
     phone: '010-692-6593 x09125',
     isFavorite: false
 };
-
-export const MockUsersFacade = {
-
-    init: jest.fn(),
-    setSelectedUser: jest.fn(),
-    toggleFav: jest.fn(),
-    setFilterText: jest.fn(),
-
-};
-
-export const MockUsersService = {
-
-    getAll: jest.fn(),
-    get: jest.fn(),
-    toggleFav: jest.fn(),
-    setFilterText: jest.fn(),
-
-};

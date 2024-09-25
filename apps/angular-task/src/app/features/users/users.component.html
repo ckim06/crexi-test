@@ -11,10 +11,16 @@
     @for (user of users; track user.id) {
         <mat-card appearance="outlined">
             <mat-card-header>
-                <mat-card-title> {{ user.name }}</mat-card-title>
-                <mat-card-subtitle
-                    >id: {{ user.id }} <span (click)="toggleFav(user)">fav? {{ user.isFavorite }}</span></mat-card-subtitle
-                >
+                <mat-card-title (click)="toggleFav(user)">
+                    @if (user.isFavorite) {
+                        <mat-icon aria-hidden="false" aria-label="Favorite" fontIcon=" star" />
+                    } @else {
+                        <mat-icon aria-hidden="false" aria-label="Favorite" fontIcon=" star_border" />
+                    }
+
+                    {{ user.name }}
+                </mat-card-title>
+                <mat-card-subtitle> id: {{ user.id }} </mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
                 Address: {{ user.address.street }} {{ user.address.suite }}<br />

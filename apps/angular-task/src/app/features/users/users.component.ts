@@ -11,11 +11,12 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { debounceTime } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
     selector: 'crx-users',
     standalone: true,
     imports: [CommonModule, MatCardModule, MatButtonModule,
-        LetDirective, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+        LetDirective, FormsModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule],
     templateUrl: './users.component.html',
     styleUrl: './users.component.scss',
 })

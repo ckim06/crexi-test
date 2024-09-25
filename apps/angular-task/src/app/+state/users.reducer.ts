@@ -25,12 +25,27 @@ export const initialUsersState: UsersState = usersAdapter.getInitialState({
     loaded: false,
 });
 export const getFilters = (state: UsersState) => state.filters;
+const { selectEntities } = usersAdapter.getSelectors();
 const reducer = createReducer(
     initialUsersState,
     on(UsersActions.initUsers, (state) => ({ ...state, loaded: false, error: null })),
     on(UsersActions.selectUser, (state) => ({ ...state, loaded: false, error: null })),
-    on(UsersActions.selectUserSuccess, (state, { user }) => ({ ...state, selectedUser: user })),
-    on(UsersActions.loadUsersSuccess, (state, { users }) => usersAdapter.setAll(users, { ...state, loaded: true })),
+    on(UsersActions.selectUserSuccess, (state, { user }) => {
+
+        const existingUser = selectEntities(state)[user.id];
+        const isFavorite = existingUser?.isFavorite || false;
+        return { ...state, selectedUser: { ...user, isFavorite } };
+
+    }),
+    on(UsersActions.loadUsersSuccess, (state, { users }) => {
+
+        users = users.map((user) => ({
+            ...user,
+            isFavorite: selectEntities(state)[user.id]?.isFavorite ?? false
+        }));
+        return usersAdapter.setAll(users, { ...state, loaded: true });
+
+    }),
     on(UsersActions.loadUsersFailure, (state, { error }) => ({ ...state, error })),
     on(UsersActions.changeFilter, (state, { filters }) => ({ ...state, loaded: false, error: null, filters })),
 

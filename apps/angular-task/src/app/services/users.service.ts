@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { UsersEntity } from '../+state/users.models';
 import { HttpClient } from '@angular/common/http';
-import { userOne, userTwo } from '../mocks/users/test-users';
 
 @Injectable({
     providedIn: 'root'
@@ -15,13 +14,13 @@ export class UsersService {
 
     getAll (): Observable<UsersEntity[]> {
 
-        return of([userOne, userTwo]);
+        return this.http.get<UsersEntity[]>('https://jsonplaceholder.typicode.com/users/');
 
     }
 
-    get (_id: string | number): Observable<UsersEntity> {
+    get (id: string | number): Observable<UsersEntity> {
 
-        return of(userOne);
+        return this.http.get<UsersEntity>(`https://jsonplaceholder.typicode.com/users/${id}`);
 
     }
 

@@ -7,7 +7,6 @@ import { Observable, of } from 'rxjs';
 
 import * as UsersActions from './users.actions';
 import { UsersEffects } from './users.effects';
-import { MockUsersService } from '../mocks/users/test-users';
 import { UsersEntity } from './users.models';
 import { UsersService } from '../services/users.service';
 
@@ -15,13 +14,20 @@ describe('UsersEffects', () => {
 
     let actions: Observable<Action>;
     let effects: UsersEffects;
+    const mockUserService = {
 
+        getAll: jest.fn(),
+        get: jest.fn(),
+        toggleFav: jest.fn(),
+        setFilterText: jest.fn(),
+
+    };
     beforeEach(() => {
 
         TestBed.configureTestingModule({
             imports: [],
             providers: [UsersEffects, provideMockActions(() => actions), provideMockStore(),
-                { provide: UsersService, useValue: MockUsersService }
+                { provide: UsersService, useValue: mockUserService }
             ],
         });
 
@@ -34,8 +40,8 @@ describe('UsersEffects', () => {
         it('should work', () => {
 
             const users:UsersEntity[] = [];
+            mockUserService.getAll.mockReturnValue(of(users));
 
-            MockUsersService.getAll.mockReturnValue(of(users));
             actions = hot('-a-|', { a: UsersActions.initUsers() });
 
             const expected = hot('-a-|', { a: UsersActions.loadUsersSuccess({ users }) });

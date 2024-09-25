@@ -7,9 +7,9 @@ import * as UsersActions from './users.actions';
 import { UsersEffects } from './users.effects';
 import { UsersFacade } from './users.facade';
 import { USERS_FEATURE_KEY, UsersState, usersReducer } from './users.reducer';
-import { MockUsersService, userOne, userTwo } from '../mocks/users/test-users';
+import { userOne, userTwo } from '../mocks/users/test-users.mocks';
 import { firstValueFrom } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 interface TestSchema {
     users: UsersState;
 }
@@ -25,8 +25,9 @@ describe('UsersFacade', () => {
 
             @NgModule({
                 imports: [StoreModule.forFeature(USERS_FEATURE_KEY, usersReducer),
+
                     EffectsModule.forFeature([UsersEffects])],
-                providers: [UsersFacade],
+                providers: [UsersFacade, provideHttpClient(withInterceptorsFromDi())],
             })
             class CustomFeatureModule {}
 
@@ -35,7 +36,7 @@ describe('UsersFacade', () => {
             })
             class RootModule {}
             TestBed.configureTestingModule({ imports: [RootModule],
-                providers: [{ provide: HttpClient, useValue: MockUsersService }] });
+                providers: [] });
 
             store = TestBed.inject(Store);
             facade = TestBed.inject(UsersFacade);

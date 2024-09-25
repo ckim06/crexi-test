@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserDetailsComponent } from './user-details.component';
 import { UsersFacade } from '../../../+state/users.facade';
-import { MockUsersFacade } from '../../../mocks/users/test-users';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('UserComponent', () => {
 
@@ -10,7 +9,14 @@ describe('UserComponent', () => {
 
     beforeEach(async () => {
 
-        const mockFacade = MockUsersFacade;
+        const mockFacade = {
+
+            init: jest.fn(),
+            setSelectedUser: jest.fn(),
+            toggleFav: jest.fn(),
+            setFilterText: jest.fn(),
+
+        };
         await TestBed.configureTestingModule({
             imports: [UserDetailsComponent, BrowserAnimationsModule],
             providers: [{ provide: UsersFacade, useValue: mockFacade }]
