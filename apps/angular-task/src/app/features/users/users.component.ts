@@ -13,12 +13,14 @@ import { MatInputModule } from '@angular/material/input';
 import { debounceTime } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import { MatGridListModule } from '@angular/material/grid-list';
 @Component({
     selector: 'crx-users',
     standalone: true,
     imports: [CommonModule, MatCardModule, MatButtonModule,
         LetDirective, FormsModule, ReactiveFormsModule,
-        MatFormFieldModule, MatInputModule, MatIconModule, MatProgressSpinnerModule],
+        MatFormFieldModule, MatInputModule, MatIconModule, MatProgressSpinnerModule, MatGridListModule],
     templateUrl: './users.component.html',
     styleUrl: './users.component.scss',
 })

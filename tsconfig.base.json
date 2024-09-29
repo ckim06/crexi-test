@@ -14,7 +14,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": { "@styles/*": ["apps/angular-task/src/app/styles/*"] }
   },
   "exclude": ["node_modules", "tmp"]
 }
