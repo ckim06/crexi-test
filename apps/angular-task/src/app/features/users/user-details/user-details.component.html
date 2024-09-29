@@ -6,8 +6,10 @@
     @if (user) {
         <div class="user-header">
             <img src="https://randomuser.me/api/portraits/women/{{ user.id }}.jpg" />
-            <h2>{{ user.name }}</h2>
-            <h3>id: {{ user.id }}</h3>
+            <div>
+                <h2>{{ user.name }}</h2>
+                <h3>id: {{ user.id }}</h3>
+            </div>
         </div>
 
         <dl class="user-info">
