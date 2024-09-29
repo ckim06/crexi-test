@@ -6,6 +6,14 @@
         <mat-label>search by name</mat-label>
         <input formControlName="searchText" matInput placeholder="Search" />
     </mat-form-field>
+    <mat-form-field>
+        <mat-label>Show if the id is...</mat-label>
+        <select formControlName="idParity" matNativeControl>
+            <option value="">None</option>
+            <option value="even">Even</option>
+            <option value="odd">Odd</option>
+        </select>
+    </mat-form-field>
 </form>
 
 <div class="cards">

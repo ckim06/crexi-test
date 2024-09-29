@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LetDirective } from '@ngrx/component';
 import { UsersFacade } from '../../+state/users.facade';
-import { UsersEntity } from '../../+state/users.models';
+import { UserFilters, UsersEntity } from '../../+state/users.models';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -35,6 +35,7 @@ export class UsersComponent implements OnInit {
         this.users$ = this.usersFacade.filteredUsers$;
         this.filterForm = this.fb.group({
             searchText: [''],
+            idParity: ['']
         });
 
     }
@@ -44,7 +45,7 @@ export class UsersComponent implements OnInit {
         this.usersFacade.init();
         this.filterForm.valueChanges.pipe(debounceTime(500)).subscribe((filters) => {
 
-            this.usersFacade.setFilterText(filters.searchText ?? '');
+            this.usersFacade.setFilters(filters as UserFilters);
 
         });
 

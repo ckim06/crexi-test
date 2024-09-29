@@ -24,10 +24,28 @@ export const selectFilters = createSelector(selectUsersState, (state: UsersState
 
 export const selectFilteredEntities = createSelector(selectAllUsers, selectFilters, (users, filters) => {
 
-    if(users && filters?.search) {
+    if(users) {
 
-        const searchString = (filters.search || '').toLowerCase();
-        return users.filter((user) => user?.name.toLowerCase().indexOf(searchString) > -1);
+        const searchString = (filters?.searchText || '').toLowerCase();
+        return users.filter((user) => user?.name.toLowerCase().indexOf(searchString) > -1)
+        .filter((user) => {
+
+            const id = +user.id;
+            if(filters?.idParity === 'even') {
+
+                return id % 2 === 0;
+
+            } else if (filters?.idParity === 'odd') {
+
+                return id % 2 !== 0;
+
+            } else {
+
+                return true;
+
+            }
+
+        });
 
     }
 

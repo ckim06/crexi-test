@@ -10,14 +10,14 @@ export interface UsersEntity {
     phone: string;
 }
 
-export interface UserFilters {
-    search?: string;
-    idParity?: 'even' | 'odd'
-}
-
 export interface UserAddress {
     street: string;
     suite: string;
     city: string;
     zipcode: string;
+}
+
+export interface UserFilters {
+    searchText?: string;
+    idParity?: string;
 }

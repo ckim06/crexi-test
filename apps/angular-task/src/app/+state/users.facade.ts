@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 
 import * as UsersActions from './users.actions';
 import * as UsersSelectors from './users.selectors';
-import { UsersEntity } from './users.models';
+import { UserFilters, UsersEntity } from './users.models';
 
 @Injectable()
 export class UsersFacade {
@@ -27,11 +27,8 @@ export class UsersFacade {
 
     }
 
-    setFilterText (search: string) {
+    setFilters (filters: UserFilters) {
 
-        const filters = {
-            search
-        };
         this.store.dispatch(UsersActions.changeFilter({ filters }));
 
     }
