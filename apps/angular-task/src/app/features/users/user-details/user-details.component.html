@@ -1,12 +1,16 @@
 <ng-template #loading>
-    <p>Loading...</p>
+    <mat-spinner />
 </ng-template>
 
-<div *ngrxLet="selectedUser$ as user; suspenseTpl: loading">
+<div *ngrxLet="selectedUser$ as user; suspenseTpl: loading" class="mat-typography">
     @if (user) {
-        <h1>{{ user.name }}</h1>
-        <h3>id: {{ user.id }}</h3>
-        <dl>
+        <div class="user-header">
+            <img src="https://randomuser.me/api/portraits/women/{{ user.id }}.jpg" />
+            <h2>{{ user.name }}</h2>
+            <h3>id: {{ user.id }}</h3>
+        </div>
+
+        <dl class="user-info">
             <dt>Email</dt>
             <dd>{{ user.email }}</dd>
 

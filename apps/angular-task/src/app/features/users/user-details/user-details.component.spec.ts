@@ -12,7 +12,6 @@ describe('UserComponent', () => {
         const mockFacade = {
 
             init: jest.fn(),
-            setSelectedUser: jest.fn(),
             toggleFav: jest.fn(),
             setFilterText: jest.fn(),
 

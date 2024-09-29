@@ -18,11 +18,6 @@ export const selectAllUsers = createSelector(selectUsersState, (state: UsersStat
 
 export const selectUsersEntities = createSelector(selectUsersState, (state: UsersState) => selectEntities(state));
 
-export const selectSelectedId = createSelector(selectUsersState, (state: UsersState) => state.selectedId);
-
-export const selectEntity = createSelector(selectUsersEntities, selectSelectedId, (entities, selectedId) =>
-    selectedId ? entities[selectedId] : undefined);
-
 export const selectedUser = createSelector(selectUsersEntities, selectRouteParams, (entities, { id }) => entities[id]);
 
 export const selectFilters = createSelector(selectUsersState, (state: UsersState) => state.filters);

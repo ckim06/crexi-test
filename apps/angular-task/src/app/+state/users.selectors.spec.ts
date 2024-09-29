@@ -40,15 +40,6 @@ describe('Users Selectors', () => {
 
         });
 
-        it('selectEntity() should return the selected Entity', () => {
-
-            const result = UsersSelectors.selectEntity(state) as UsersEntity;
-            const selId = getUsersId(result);
-
-            expect(selId).toBe('PRODUCT-BBB');
-
-        });
-
         it('selectUsersLoaded() should return the current "loaded" status', () => {
 
             const result = UsersSelectors.selectUsersLoaded(state);

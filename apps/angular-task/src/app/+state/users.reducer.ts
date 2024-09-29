@@ -28,7 +28,6 @@ const { selectEntities } = usersAdapter.getSelectors();
 const reducer = createReducer(
     initialUsersState,
     on(UsersActions.initUsers, (state) => ({ ...state, loaded: false, error: null })),
-    on(UsersActions.selectUser, (state) => ({ ...state, loaded: false, error: null })),
     on(UsersActions.selectUserSuccess, (state, { user }) => {
 
         const existingUser = selectEntities(state)[user.id];
