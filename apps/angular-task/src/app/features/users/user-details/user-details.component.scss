@@ -2,9 +2,14 @@
 
 .user-header {
     display: flex;
-
-    h2 {
-    }
-    h3 {
+    .profile {
+        border: solid 1px v.$border-color;
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        margin-right: v.$default-gap;
     }
 }

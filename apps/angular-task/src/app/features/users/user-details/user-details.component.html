@@ -5,10 +5,10 @@
 <div *ngrxLet="selectedUser$ as user; suspenseTpl: loading" class="mat-typography">
     @if (user) {
         <div class="user-header">
-            <div class="profile">{{ user.name[0] }}</div>
+            <img class="profile" src="https://randomuser.me/api/portraits/women/{{ user.id }}.jpg" />
             <div>
-                <h2>{{ user.name }}</h2>
-                <h3>id: {{ user.id }}</h3>
+                <h2 class="mat-title-medium">{{ user.name }}</h2>
+                <h3 class="mat-title-small">id: {{ user.id }}</h3>
             </div>
         </div>
 
