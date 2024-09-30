@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store';
 import * as UsersActions from './users.actions';
 import { UsersState, initialUsersState, usersReducer } from './users.reducer';
 import { userOne, userTwo } from '../mocks/users//test-users.mocks';
@@ -19,17 +18,14 @@ describe('Users Reducer', () => {
 
         });
 
-    });
+        it('selectUserSuccess should return a user', () => {
 
-    describe('unknown action', () => {
+            const action = UsersActions.selectUserSuccess({ user: userOne });
 
-        it('should return the previous state', () => {
+            const result: UsersState = usersReducer(initialUsersState, action);
 
-            const action = {} as Action;
-
-            const result = usersReducer(initialUsersState, action);
-
-            expect(result).toBe(initialUsersState);
+            expect(result.loaded).toBe(true);
+            expect(result.ids.length).toBe(1);
 
         });
 
