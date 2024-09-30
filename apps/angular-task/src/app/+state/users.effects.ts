@@ -20,12 +20,7 @@ export class UsersEffects {
             exhaustMap(() => this.userService.getAll().pipe(
                 map((users) => users.map((user) => ({ ...user, isFavorite: false }))),
                 map((users) => UsersActions.loadUsersSuccess({ users })),
-                catchError((error) => {
-
-                    console.error('Error', error);
-                    return of(UsersActions.loadUsersFailure({ error }));
-
-                }),
+                catchError((error: string) => of(UsersActions.loadUsersFailure({ error }))),
             ),)
         ));
     selectUserByRoute$ = createEffect(() =>
@@ -35,12 +30,7 @@ export class UsersEffects {
             filter((id) => id),
             exhaustMap((id) => this.userService.get(id).pipe(
                 map((user) => UsersActions.selectUserSuccess({ user })),
-                catchError((error) => {
-
-                    console.error('Error', error);
-                    return of(UsersActions.selectUserFailure({ error }));
-
-                }),
+                catchError((error) => of(UsersActions.selectUserFailure({ error }))),
             ))
         ));
 

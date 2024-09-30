@@ -2,13 +2,14 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Action } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
-import { hot } from 'jasmine-marbles';
+import { cold, hot } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
 
 import * as UsersActions from './users.actions';
 import { UsersEffects } from './users.effects';
 import { UsersEntity } from './users.models';
 import { UsersService } from '../services/users.service';
+import { routerNavigatedAction } from '@ngrx/router-store';
 
 describe('UsersEffects', () => {
 
@@ -47,6 +48,44 @@ describe('UsersEffects', () => {
             const expected = hot('-a-|', { a: UsersActions.loadUsersSuccess({ users }) });
 
             expect(effects.init$).toBeObservable(expected);
+
+        });
+        it('loadUsersFailure', () => {
+
+            const outcome = UsersActions.loadUsersFailure({ error: 'error' });
+
+            actions = hot('-a', { a: UsersActions.initUsers() });
+            const response = cold('-#|', {}, 'error');
+            const expected = cold('--b', { b: outcome });
+            mockUserService.getAll = jest.fn(() => response);
+
+            expect(effects.init$).toBeObservable(expected);
+
+        });
+
+    });
+
+    xdescribe('selectUserByRoute$', () => {
+
+        // it('should work', () => {
+
+        //     mockUserService.get.mockReturnValue(of(userOne));
+
+        //     actions = hot('-a-|', { a: routerNavigatedAction });
+        //     const expected = hot('-a-|', { a: UsersActions.selectUserSuccess({ user: userOne }) });
+        //     expect(effects.selectUserByRoute$).toBeObservable(expected);
+
+        // });
+        it('selectUserFailure', () => {
+
+            const outcome = UsersActions.selectUserFailure({ error: 'error' });
+
+            actions = hot('-a', { a: routerNavigatedAction });
+            const response = cold('-#|', {}, 'error');
+            const expected = cold('--b', { b: outcome });
+            mockUserService.get = jest.fn(() => response);
+
+            expect(effects.selectUserByRoute$).toBeObservable(expected);
 
         });
 

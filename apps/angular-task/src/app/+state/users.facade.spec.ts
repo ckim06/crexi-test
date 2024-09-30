@@ -81,6 +81,32 @@ describe('UsersFacade', () => {
 
         });
 
+        it('should toggle favorite', async () => {
+
+            store.dispatch(UsersActions.loadUsersSuccess({
+                users: [userOne, userTwo],
+            }),);
+
+            let list = await firstValueFrom(facade.allUsers$);
+            facade.toggleFav(list[0]);
+            list = await firstValueFrom(facade.allUsers$);
+            expect(list[0].isFavorite).toBe(true);
+
+        });
+
+        it('should set filters', async () => {
+
+            store.dispatch(UsersActions.loadUsersSuccess({
+                users: [userOne, userTwo],
+            }),);
+
+            let list = await firstValueFrom(facade.allUsers$);
+            facade.setFilters({ searchText: 'Leanne' });
+            list = await firstValueFrom(facade.filteredUsers$);
+            expect(list.length).toBe(1);
+
+        });
+
     });
 
 });
